@@ -7,14 +7,14 @@ const winningMessageControl = document.getElementById('winningMessage');
 const winningText = document.querySelector('[winning-text]');
 let tempDealer = [];
 let tempPlayer = [];
+let tempPerson = [];
+
 let deck = ['As','2s','3s','4s','5s','6s','7s','8s','9s','Ts','Js','Qs','Ks',
 				'Ah','2h','3h','4h','5h','6h','7h','8h','9h','Th','Jh','Qh','Kh',
 				'Ac','2c','3c','4c','5c','6c','7c','8c','9c','Tc','Jc','Qc','Kc',
 				'Ad','2d','3d','4d','5d','6d','7d','8d','9d','Td','Jd','Qd','Kd'];
-let turn = 0;
 let player = [];
 let dealer = [];
-let tempPerson = [];
 let gameOver = false;
 
 const reset = () => {
@@ -114,4 +114,4 @@ const setWinscreen = () => {
 hitButton.addEventListener('click', pHit);
 standButton.addEventListener('click', pStand);
 restartButton.addEventListener('click', deal);
-
+deal()
