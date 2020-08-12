@@ -59,8 +59,7 @@ const dHit = () => {
 	if (bustCheck(dealer)) {
 
 	} else {
-		gameOver = true;
-		console.log("Bust")
+		setWinscreen()
 	}
 }
 const pHit = () => {
@@ -68,8 +67,7 @@ const pHit = () => {
 	if (bustCheck(player)) {
 
 	} else {
-		gameOver = true;
-		console.log("Bust")
+		setWinscreen()
 	}
 }
 const pStand = () => {}
