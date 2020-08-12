@@ -1,8 +1,10 @@
 //WinLogic: Dealer>=Player>=21
 //FaceCard = 10, ace= 1 or 11
-let hitButton = document.getElementById("hitButton");
-let standButton = document.getElementById("standButton");
-let restartButton = document.getElementById("restartButton");
+let hitButton = document.getElementById('hitButton');
+let standButton = document.getElementById('standButton');
+let restartButton = document.getElementById('restartButton');
+const winningMessageControl = document.getElementById('winningMessage');
+const winningText = document.querySelector('[winning-text]');
 let deck = ['As','2s','3s','4s','5s','6s','7s','8s','9s','10s','Js','Qs','Ks',
 				'Ah','2h','3h','4h','5h','6h','7h','8h','9h','10h','Jh','Qh','Kh',
 				'Ac','2c','3c','4c','5c','6c','7c','8c','9c','10c','Jc','Qc','Kc',
@@ -23,16 +25,11 @@ const reset = () => {
 	gameOver = false;
 	tempPerson = [];
 	turn = 0;
-
-	hitButton.addEventListener('click', pHit())
-	standButton.addEventListener('click', pStand())
-	restartButton.addEventListener('click', pHit())
-
-
 	//add/removeeventlisteners
 }
 
 const deal = () => {
+
 	reset()
 	shuffle()
 	player.push(deck.shift())
@@ -70,9 +67,7 @@ const pHit = () => {
 		console.log("Bust")
 	}
 }
-const pStand = () => {
-	return true
-}
+const pStand = () => {}
 const cardParse = (aElem) => {
 	if (aElem.charAt(0) == 'J' || aElem.charAt(0) == 'Q' || aElem.charAt(0) =='K') {
 		aElem = '10'
@@ -84,7 +79,6 @@ const cardParse = (aElem) => {
 	aElem = parseInt(aElem)
 	tempPerson.push(aElem)
 }
-
 const bustCheck = (person) => {
 	tempPerson = [];
 	person.forEach(element => cardParse(element));
@@ -97,4 +91,18 @@ const bustCheck = (person) => {
 	}
 
 }
-deal()
+const setWinscreen = () => {
+	tempPerson = [];
+	person.forEach(element => cardParse(element));
+	tempPerson = tempPerson.reduce(function(accumulator, currentValue){return accumulator+currentValue});
+	if () {
+		
+	} else {
+		winningText.innerText = `${(turn % 2 == 0) ? "X's" : "O's" } wins!`
+	}
+	winningMessageControl.classList.add('show')
+}
+
+hitButton.addEventListener('click', pHit);
+standButton.addEventListener('click', pStand);
+restartButton.addEventListener('click', deal);

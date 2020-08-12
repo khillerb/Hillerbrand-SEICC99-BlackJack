@@ -3,12 +3,15 @@
 <head>
 	<title>BlackJack</title>
 	<link rel="stylesheet" href="css/main.css">
-	<script type="application/javascript" src='js/main.js'></script>
+	<script type="application/javascript" src='js/main.js' defer></script>
 </head>
 <body>
 	<button id="hitButton">Hit</button>
 	<button id="standButton">Stand</button>
-	<button id="restartButton">Restart</button>
+	<div class="winning-message" id="winningMessage">
+		<div winning-text>X Wins!</div>
+		<button id="restartButton">Restart</button>
+	</div>
 	
 </body>
 </html>
