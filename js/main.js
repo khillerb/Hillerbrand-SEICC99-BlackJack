@@ -5,10 +5,12 @@ let standButton = document.getElementById('standButton');
 let restartButton = document.getElementById('restartButton');
 const winningMessageControl = document.getElementById('winningMessage');
 const winningText = document.querySelector('[winning-text]');
-let deck = ['As','2s','3s','4s','5s','6s','7s','8s','9s','10s','Js','Qs','Ks',
-				'Ah','2h','3h','4h','5h','6h','7h','8h','9h','10h','Jh','Qh','Kh',
-				'Ac','2c','3c','4c','5c','6c','7c','8c','9c','10c','Jc','Qc','Kc',
-				'Ad','2d','3d','4d','5d','6d','7d','8d','9d','10d','Jd','Qd','Kd'];
+let tempDealer = [];
+let tempPlayer = [];
+let deck = ['As','2s','3s','4s','5s','6s','7s','8s','9s','Ts','Js','Qs','Ks',
+				'Ah','2h','3h','4h','5h','6h','7h','8h','9h','Th','Jh','Qh','Kh',
+				'Ac','2c','3c','4c','5c','6c','7c','8c','9c','Tc','Jc','Qc','Kc',
+				'Ad','2d','3d','4d','5d','6d','7d','8d','9d','Td','Jd','Qd','Kd'];
 let turn = 0;
 let player = [];
 let dealer = [];
@@ -18,13 +20,16 @@ let gameOver = false;
 const reset = () => {
 	player = [];
 	dealer = [];
-	deck = ['1s','2s','3s','4s','5s','6s','7s','8s','9s','10s','Js','Qs','As',
-				'1h','2h','3h','4h','5h','6h','7h','8h','9h','10h','Jh','Qh','Ah',
-				'1c','2c','3c','4c','5c','6c','7c','8c','9c','10c','Jc','Qc','Ac',
-				'1d','2d','3d','4d','5d','6d','7d','8d','9d','10d','Jd','Qd','Ad'];
+	deck = ['As','2s','3s','4s','5s','6s','7s','8s','9s','Ts','Js','Qs','Ks',
+				'Ah','2h','3h','4h','5h','6h','7h','8h','9h','Th','Jh','Qh','Kh',
+				'Ac','2c','3c','4c','5c','6c','7c','8c','9c','Tc','Jc','Qc','Kc',
+				'Ad','2d','3d','4d','5d','6d','7d','8d','9d','Td','Jd','Qd','Kd'];
 	gameOver = false;
 	tempPerson = [];
+	tempPlayer = [];
+	tempDealer = [];
 	turn = 0;
+	winningMessageControl.classList.remove('show')
 	//add/removeeventlisteners
 }
 
@@ -68,8 +73,8 @@ const pHit = () => {
 	}
 }
 const pStand = () => {}
-const cardParse = (aElem) => {
-	if (aElem.charAt(0) == 'J' || aElem.charAt(0) == 'Q' || aElem.charAt(0) =='K') {
+const cardParse = (aElem,tempPerson) => {
+	if (aElem.charAt(0) == 'J' || aElem.charAt(0) == 'Q' || aElem.charAt(0) =='K'|| aElem.charAt(0) =='T') {
 		aElem = '10'
 	}
 	if (aElem.charAt(0) == 'A') {
@@ -81,7 +86,7 @@ const cardParse = (aElem) => {
 }
 const bustCheck = (person) => {
 	tempPerson = [];
-	person.forEach(element => cardParse(element));
+	person.forEach(element => cardParse(element,tempPerson));
 	tempPerson = tempPerson.reduce(function(accumulator, currentValue){return accumulator+currentValue});
 	if (tempPerson > 21) {
 		return false
@@ -92,13 +97,18 @@ const bustCheck = (person) => {
 
 }
 const setWinscreen = () => {
-	tempPerson = [];
-	person.forEach(element => cardParse(element));
-	tempPerson = tempPerson.reduce(function(accumulator, currentValue){return accumulator+currentValue});
-	if () {
-		
+	player.forEach(element => cardParse(element, tempPlayer));
+	tempPlayer = tempPlayer.reduce(function(accumulator, currentValue){return accumulator+currentValue});
+	dealer.forEach(element => cardParse(element, tempDealer));
+	tempDealer = tempDealer.reduce(function(accumulator, currentValue){return accumulator+currentValue});
+	if (!bustCheck(player)) {
+		winningText.innerText = 'You bust, Dealer wins!'
+	} else if (!bustCheck(dealer)) {
+		winningText.innerText = 'Dealer busts, You win!'
+	} else if (tempDealer == tempPlayer) {
+		winningText.innerText = 'Push/Tie! Restart!'
 	} else {
-		winningText.innerText = `${(turn % 2 == 0) ? "X's" : "O's" } wins!`
+		winningText.innerText = `${(tempDealer > tempPlayer) ? "Dealer" : "Player"} wins!`
 	}
 	winningMessageControl.classList.add('show')
 }
@@ -106,3 +116,4 @@ const setWinscreen = () => {
 hitButton.addEventListener('click', pHit);
 standButton.addEventListener('click', pStand);
 restartButton.addEventListener('click', deal);
+
