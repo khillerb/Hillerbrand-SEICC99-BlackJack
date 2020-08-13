@@ -4,11 +4,11 @@ let hitButton = document.getElementById('hitButton');
 let standButton = document.getElementById('standButton');
 let restartButton = document.getElementById('restartButton');
 let startButton = document.getElementById('startButton');
-let  betl = document.getElementById('betl');
-let  betlO = document.getElementById('betlO');
-let  betlOO = document.getElementById('betlOO');
-let  betSOO = document.getElementById('betSOO');
-let  enterBet = document.getElementById('enterBet');
+let betl = document.getElementById('betl');
+let betlO = document.getElementById('betlO');
+let betlOO = document.getElementById('betlOO');
+let betSOO = document.getElementById('betSOO');
+let enterBet = document.getElementById('enterBet');
 const winningMessageControl = document.getElementById('winningMessage');
 const startingMessageControl = document.getElementById('startingMessage');
 const winningText = document.querySelector('[winning-text]');
@@ -77,7 +77,7 @@ const bet10 = () => {
 	if ((bank-10) >= 0) {
 		bet += 10
 		bank -= 10
-		betData.innerText = bet
+		betData.innerText = `Bet: ${'$' + bet}`
 	}
 	else {
 		alert("Not enough in the bank!")
@@ -88,7 +88,7 @@ const bet100 = () => {
 	if ((bank-100) >= 0) {
 		bet += 100
 		bank -= 100
-		betData.innerText = bet
+		betData.innerText = `Bet: ${'$' + bet}`
 	} else {
 		alert("Not enough in the bank!")
 	}
@@ -97,12 +97,13 @@ const bet500 = () => {
 	if ((bank-500) >= 0) {
 		bet += 500
 		bank -= 500
-		betData.innerText = bet
+		betData.innerText = `Bet: ${'$' + bet}`
 	} else {
 		alert("Not enough in the bank!")
 	}
 } 
 const enterBet = () => {
+	betData.innerText = `Bet: ${'$' + bet}`
 	betl.removeEventListener('click', bet1)
 	betlO.removeEventListener('click', bet10)
 	betlOO.removeEventListener('click', bet100)
