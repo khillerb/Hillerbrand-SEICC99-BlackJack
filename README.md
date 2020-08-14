@@ -10,7 +10,8 @@ The In/Famous casino game has been brought your browser. Blackjack is theorize t
 ![Loser](imgREADME/Loser.png?raw=true "Loser")
 
 ### Getting Started:
-
+Click link to play:
+  https://khillerb.github.io/Hillerbrand-SEICC99-BlackJack/
 ### Next Setps:
   1. add comments
   1. add multiple Ace value
