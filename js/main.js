@@ -283,3 +283,11 @@ betlOO.addEventListener('click', betOH);
 betSOO.addEventListener('click', betFH);
 enterBet.addEventListener('click', betEnter);
 
+/* Icebox:
+rename function or two
+add comments
+add multiple Ace value
+setTimeout for dhit()
+Double/Split functions
+
+*/
