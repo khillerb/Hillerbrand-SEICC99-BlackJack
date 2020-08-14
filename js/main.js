@@ -12,6 +12,8 @@ const startButton = document.getElementById("startButton");
 const slotone = document.getElementById('slot1');
 const slottwo = document.getElementById('slot2');
 const slotthree = document.getElementById('slot3');
+const slotfour = document.getElementById('slot4');
+const slotnine = document.getElementById('slot9');
 const sloteight = document.getElementById('slot8');
 const slotsix = document.getElementById('slot6');
 const slotseven = document.getElementById('slot7');
@@ -19,6 +21,7 @@ const cardClasses = document.querySelectorAll('.card')
 const winningMessageControl = document.getElementById('winningMessage');
 const startingMessageControl = document.getElementById('startingMessage');
 const winningText = document.querySelector('[winning-text]');
+const playDirective = document.querySelector('[play-directive]')
 const betData = document.querySelector('[bet-data]');
 let tempDealer = [];
 let tempPlayer = [];
@@ -36,6 +39,8 @@ let gameOver = false;
 
 
 const reset = () => {
+	bet = 0
+	betData.innerText = `Bank: ${'$' + bank},Bet: ${'$' + bet}`
 	betl.addEventListener('click', betO)
 	betlO.addEventListener('click', betT)
 	betlOO.addEventListener('click', betOH)
@@ -45,13 +50,15 @@ const reset = () => {
 				'Ha','H2','H3','H4','H5','H6','H7','H8','H9','Ht','Hj','Hq','Hk',
 				'Ca','C2','C3','C4','C5','C6','C7','C8','C9','Ct','Cj','Cq','Ck',
 				'Da','D2','D3','D4','D5','D6','D7','D8','D9','Dt','Dj','Dq','Dk']
-	deck.forEach(card => function(card) {
+	deck.forEach(card => {
 		slotone.classList.remove(card)
-		slotthree.classList.remove(card)
 		slottwo.classList.remove(card)
+		slotthree.classList.remove(card)
+		slotfour.classList.remove(card)
 		slotsix.classList.remove(card)
 		slotseven.classList.remove(card)
 		sloteight.classList.remove(card)
+		slotnine.classList.remove(card)
 	})
 	startingMessageControl.classList.remove('show')
 	winningMessageControl.classList.remove('show')
@@ -109,6 +116,9 @@ const betEnter = () => {
 	betlOO.removeEventListener('click', betOH)
 	betSOO.removeEventListener('click', betFH)
 	enterBet.removeEventListener('click', betEnter)
+	hitButton.addEventListener('click', pHit); 
+	standButton.addEventListener('click', pStand);
+	playDirective.innerText = 'Please choose whether you would like to hit or stand! '
 	deal()
 	cardRender()
 }
@@ -153,13 +163,14 @@ const pHit = () => {
 }
 
 const pStand = () => {
+	hitButton.removeEventListener('click', pHit); 
+	standButton.removeEventListener('click', pStand);
 	wipeTemp()
 	for (tempDealer = make(dealer,tempDealer); tempDealer <= 16; dHit()) {
 		console.log('dHit')
 		cardRender()
 	}
-	setWinscreen()
-	
+	setWinscreen()	
 }
 
 const bustCheck = (role) => {
@@ -171,7 +182,6 @@ const bustCheck = (role) => {
 	else {
 		return true
 	}
-
 }
 const setWinscreen = () => {
 	wipeTemp()
@@ -180,21 +190,22 @@ const setWinscreen = () => {
 	if (!bustCheck(player)) {
 		winningText.innerText = `You bust and lose ${'$' + bet}, Dealer wins!`
 	} else if (!bustCheck(dealer)) {
-		winningText.innerText = `Dealer busts, You win ${'$'+ 2*bet}!`
-		bank += (2 * bet)
+		let betDub = betDouble(bet)
+		winningText.innerText = `Dealer busts, You win ${'$'+ betDub}!`
+		bank += betDub
 	} else if (tempDealer == tempPlayer) {
 		winningText.innerText = 'Push. Bet returned'
 		bank += bet
 	} else {
-		winningText.innerText = `${(tempDealer > tempPlayer) ? `Dealer Wins! You lose ${'$' + bet}` : `You win ${'$'+ 2*bet}!`}`
+		
 		if (tempDealer > tempPlayer) {
-
+			winningText.innerText = `Dealer Wins! You lose ${'$' + bet}`
 		} else {
-			bank += (2 * bet)
+			let betDub = betDouble(bet)
+			bank += betDub
+			winningText.innerText = `You win ${'$'+ betDub}!`
 		}
 	}
-	bet = 0
-	betData.innerText = `Bank: ${'$' + bank},Bet: ${'$' + bet}`
 	gameOver = true
 	cardRender(gameOver)
 	winningMessageControl.classList.add('show')
@@ -225,9 +236,14 @@ const cardRender = (gameOver) => {
 			slotone.classList.add(player[0])
 		} else if (i == 1) {
 			slottwo.classList.add(player[1])
+			slotone.style.marginRight = "-150px";
 		} else if (i == 2) {
 			slotthree.classList.add(player[2])
-		}else {
+			slottwo.style.marginRight = "-150px";
+		} else if (i == 3) {
+			slotfour.classList.add(player[3])
+			slotthree.style.marginRight = "-150px";
+		} else {
 			console.log('noMatch', i, player[0], player[1])
 		}
 	}
@@ -239,14 +255,22 @@ const cardRender = (gameOver) => {
 			slotseven.classList.add(dealer[1])
 		} else if (d == 2) {
 			sloteight.classList.add(dealer[2])
-		}else {
+			slotseven.style.marginRight = "-150px";
+		} else if (d == 3) {
+			slotnine.classList.add(dealer[3])
+			sloteight.style.marginRight = "-150px";
+		} else {
 			console.log('noMatch', d, dealer[0], dealer[1])
 		}
 		if (gameOver) {
 			slotsix.classList.remove('back')
 			slotsix.classList.add(dealer[0])
+			slotsix.style.marginRight = "-150px";
 		}
 	}
+}
+const betDouble = (b) => {
+	return 2 * b
 }
 
 hitButton.addEventListener('click', pHit); 
