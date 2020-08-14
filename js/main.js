@@ -46,6 +46,8 @@ const reset = () => {
 	betlOO.addEventListener('click', betOH)
 	betSOO.addEventListener('click', betFH)
 	enterBet.addEventListener('click', betEnter)
+	hitButton.removeEventListener('click', pHit); 
+	standButton.removeEventListener('click', pStand);	
 	deck = ['Sa','S2','S3','S4','S5','S6','S7','S8','S9','St','Sj','Sq','Sk',
 				'Ha','H2','H3','H4','H5','H6','H7','H8','H9','Ht','Hj','Hq','Hk',
 				'Ca','C2','C3','C4','C5','C6','C7','C8','C9','Ct','Cj','Cq','Ck',
@@ -66,7 +68,8 @@ const reset = () => {
 	dealer = []
 	gameOver = false;
 	wipeTemp()
-	shuffle()	
+	shuffle()
+
 }
 
 const betO = () => {
