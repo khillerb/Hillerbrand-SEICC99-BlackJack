@@ -1,3 +1,6 @@
+* {
+	box-sizing: border-box;
+}
 .winning-message {
 	display: none;
 	position: fixed;
@@ -66,4 +69,211 @@
 	padding: .25em .5em;
 	cursor: pointer;
 }
+body{
+	justify-items: center;
+	align-items: center;
+	justify-content: center;
+	align-content: center;
+	text-align: center;
+}
+.playArea {
+	font-size: 3rem;
+	margin: 7.5vh auto ;
+	height: 85vh;
+	width: 85vw;
+	border: 2px solid black;
+	padding: .25em .5em;
+	display: grid;
+	background-color: rgba(149,175,0,0.81);
+	text-align: center;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr .5fr 1fr 1fr 1fr 1fr 1fr;
+	grid-template-rows: .5fr 1fr .5fr;
+}
+.instructions {
+	grid-column-start: 1;
+	grid-column-end: -1;
+	justify-items: center;
+	align-items: center;
+	justify-content: center;
+	align-content: center;
+	text-align: center;
+}
+#controlBox {
+	grid-column-start: 1;
+	grid-column-end: -1;
+	justify-items: center;
+	align-items: center;
+	justify-content: center;
+	align-content: center;
+	text-align: center;
+}
+.card.back::before{
+	content: url(cards/1B.svg)
+}
+.card.Sa::before {
+	content: url(cards/SA.svg)
+}
+.card.Da::after {
+	content: url(cards/DA.svg)
+}
+.card.Ca::after {
+	content: url(cards/CA.svg)
+}
+.card.Ha::after {
+	content: url(cards/HA.svg)
+}
+.card.Sk::before {
+	content: url(cards/SK.svg)
+}
+.card.Dk::after {
+	content: url(cards/DK.svg)
+}
+.card.Ck::after {
+	content: url(cards/CK.svg)
+}
+.card.Hk::after {
+	content: url(cards/HK.svg)
+}
+.card.Sq::before {
+	content: url(cards/SQ.svg)
+}
+.card.Dq::after {
+	content: url(cards/DQ.svg)
+}
+.card.Cq::after {
+	content: url(cards/CQ.svg)
+}
+.card.Hq::after {
+	content: url(cards/HQ.svg)
+}
+.card.Sj::before {
+	content: url(cards/JS.svg)
+}
+.card.Dj::after {
+	content: url(cards/DJ.svg)
+}
+.card.Cj::after {
+	content: url(cards/CJ.svg)
+}
+.card.Hj::after {
+	content: url(cards/HJ.svg)
+}
+.card.St::before {
+	content: url(cards/ST.svg)
+}
+.card.Dt::after {
+	content: url(cards/DT.svg)
+}
+.card.Ct::after {
+	content: url(cards/CT.svg)
+}
+.card.Ht::after {
+	content: url(cards/HT.svg)
+}
+.card.S9::before {
+	content: url(cards/S9.svg)
+}
+.card.D9::after {
+	content: url(cards/D9.svg)
+}
+.card.C9::after {
+	content: url(cards/C9.svg)
+}
+.card.H9::after {
+	content: url(cards/H9.svg)
+}
+.card.S8::before {
+	content: url(cards/S8.svg)
+}
+.card.D8::after {
+	content: url(cards/D8.svg)
+}
+.card.C8::after {
+	content: url(cards/C8.svg)
+}
+.card.H8::after {
+	content: url(cards/H8.svg)
+}
+.card.S7::before {
+	content: url(cards/S7.svg)
+}
+.card.D7::after {
+	content: url(cards/D7.svg)
+}
+.card.C7::after {
+	content: url(cards/C7.svg)
+}
+.card.H7::after {
+	content: url(cards/H7.svg)
+}
+.card.S6::before {
+	content: url(cards/S6.svg)
+}
+.card.D6::after {
+	content: url(cards/D6.svg)
+}
+.card.C6::after {
+	content: url(cards/C6.svg)
+}
+.card.H6::after {
+	content: url(cards/H6.svg)
+}
+.card.S5::before {
+	content: url(cards/S5.svg)
+}
+.card.D5::after {
+	content: url(cards/D5.svg)
+}
+.card.C5::after {
+	content: url(cards/C5.svg)
+}
+.card.H5::after {
+	content: url(cards/H5.svg)
+}
+.card.S4::before {
+	content: url(cards/S4.svg)
+}
+.card.D4::after {
+	content: url(cards/D4.svg)
+}
+.card.C4::after {
+	content: url(cards/C4.svg)
+}
+.card.H4::after {
+	content: url(cards/H4.svg)
+}
+.card.S3::before {
+	content: url(cards/S3.svg)
+}
+.card.D3::after {
+	content: url(cards/D3.svg)
+}
+.card.C3::after {
+	content: url(cards/C3.svg)
+}
+.card.H3::after {
+	content: url(cards/H3.svg)
+}
+.card.S2::before {
+	content: url(cards/S2.svg)
+}
+.card.D2::after {
+	content: url(cards/D2.svg)
+}
+.card.C2::after {
+	content: url(cards/C2.svg)
+}
+.card.H2::after {
+	content: url(cards/H2.svg)
+}
+
+
+
+
+
+
+
+
+
+
 

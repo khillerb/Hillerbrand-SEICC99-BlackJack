@@ -9,7 +9,10 @@ const betSOO = document.getElementById("betSOO");
 const enterBet = document.getElementById("enterBet");
 const restartButton = document.getElementById("restartButton");
 const startButton = document.getElementById("startButton");
-
+const slotone = document.getElementById('slot1');
+const slottwo = document.getElementById('slot2');
+const slotsix = document.getElementById('slot6');
+const slotseven = document.getElementById('slot7');
 const winningMessageControl = document.getElementById('winningMessage');
 const startingMessageControl = document.getElementById('startingMessage');
 const winningText = document.querySelector('[winning-text]');
@@ -29,6 +32,12 @@ let gameOver = false;
 
 
 const reset = () => {
+	betl.addEventListener('click', betO)
+	betlO.addEventListener('click', betT)
+	betlOO.addEventListener('click', betOH)
+	betSOO.addEventListener('click', betFH)
+	enterBet.addEventListener('click', betEnter)
+
 	startingMessageControl.classList.remove('show')
 	winningMessageControl.classList.remove('show')
 	player = []
@@ -38,10 +47,9 @@ const reset = () => {
 				'Ac','2c','3c','4c','5c','6c','7c','8c','9c','Tc','Jc','Qc','Kc',
 				'Ad','2d','3d','4d','5d','6d','7d','8d','9d','Td','Jd','Qd','Kd']
 	gameOver = false;
-	tempPerson = [];
-	tempPlayer = [];
-	tempDealer = [];
-	bet = 0;
+	tempPerson = []
+	tempPlayer = []
+	tempDealer = []
 	shuffle()	
 }
 
@@ -91,7 +99,9 @@ const betEnter = () => {
 	betlO.removeEventListener('click', betT)
 	betlOO.removeEventListener('click', betOH)
 	betSOO.removeEventListener('click', betFH)
+	enterBet.removeEventListener('click', betEnter)
 	deal()
+	cardRender()
 }
 
 const deal = () => {
@@ -162,15 +172,18 @@ const setWinscreen = () => {
 	} else if (!bustCheck(dealer)) {
 		winningText.innerText = `Dealer busts, You win ${'$'+ 2*bet}!`
 		bank += 2*bet
+		bet = 0
 	} else if (tempDealer == tempPlayer) {
 		winningText.innerText = 'Push. Bet returned'
 		bank += bet
+		bet = 0
 	} else {
 		winningText.innerText = `${(tempDealer > tempPlayer) ? `Dealer Wins! You lose ${'$' + bet}` : `You win ${'$'+ 2*bet}!`}`
 		if (tempDealer > tempPlayer){
 			bet = 0
 		} else {
 			bank += 2*bet
+			bet = 0
 		}
 	}
 	winningMessageControl.classList.add('show')
@@ -194,6 +207,27 @@ const wipeTemp = () => {
 	tempPerson = [];
 	tempDealer = [];
 	tempPlayer = [];
+}
+const cardRender = () => {
+	for (let i in player) {
+		if (i == 0) {
+			slotone.classList.add(player[0])
+		} else if (i == 1){
+			slottwo.classList.add(player[1])
+		} else {
+			console.log('noMatch', i, player[0], player[1])
+		}
+	}
+	
+	for (let d in dealer) {
+		if (d == 0) {
+			slotsix.classList.add(dealer[0])
+		} else if (d == 1){
+			slotseven.classList.add(dealer[1])
+		} else {
+			console.log('noMatch', d, dealer[0], dealer[1])
+		}
+	}
 }
 
 hitButton.addEventListener('click', pHit); 

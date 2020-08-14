@@ -6,20 +6,37 @@
 	<script type="application/javascript" src='js/main.js' defer></script>
 </head>
 <body>
-	<button id="hitButton">Hit</button>
-	<button id="standButton">Stand</button>
-	<button id="betl">1</button>
-	<button id="betlO">10</button>
-	<button id="betlOO">100</button>
-	<button id="betSOO">500</button>
-	<button id="enterBet">EnterBet</button>
-	<div bet-data>Bank: $2500, Bet: $0</div>
+	<div class="playArea">
+		<div class="instructions" play-directive>Please enter a bet!</div>
+		<div class="card" id="slot1"></div>
+		<div class="card" id="slot2"></div>
+		<div class="card" id="slot3"></div>
+		<div class="card" id="slot4"></div>
+		<div class="card" id="slot5"></div>
+		<div class="cardBreak"></div>
+		<div class="card" id="slot6"></div>
+		<div class="card" id="slot7"></div>
+		<div class="card" id="slot8"></div>
+		<div class="card" id="slot9"></div>
+		<div class="card" id="slot10"></div>
+
+		<div id="controlBox">
+			<button id="hitButton">Hit</button>
+			<button id="standButton">Stand</button>
+			<button id="betl">$1</button>
+			<button id="betlO">$10</button>
+			<button id="betlOO">$100</button>
+			<button id="betSOO">$500</button>
+			<button id="enterBet">Enter Bet</button>
+			<div bet-data>Bank: $2500, Bet: $0</div>
+		</div>
+	</div>
 	<div class="winning-message" id="winningMessage">
 		<div winning-text>Player Wins!</div>
 		<button id="restartButton">Restart</button>
 	</div>
 	<div class="starting-message show" id="startingMessage">
-		<div id="starting-text">Welcome To Blackjack</div>
+		<div id="starting-text">Welcome To<br>Blackjack</div>
 		<button id="startButton">Start</button>
 	</div>
 	
