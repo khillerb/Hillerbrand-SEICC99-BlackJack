@@ -11,8 +11,11 @@ const restartButton = document.getElementById("restartButton");
 const startButton = document.getElementById("startButton");
 const slotone = document.getElementById('slot1');
 const slottwo = document.getElementById('slot2');
+const slotthree = document.getElementById('slot3');
+const sloteight = document.getElementById('slot8');
 const slotsix = document.getElementById('slot6');
 const slotseven = document.getElementById('slot7');
+const cardClasses = document.querySelectorAll('.card')
 const winningMessageControl = document.getElementById('winningMessage');
 const startingMessageControl = document.getElementById('startingMessage');
 const winningText = document.querySelector('[winning-text]');
@@ -22,13 +25,14 @@ let tempPlayer = [];
 let tempPerson = [];
 let bet = 0;
 let bank = 2500;
-let deck = ['As','2s','3s','4s','5s','6s','7s','8s','9s','Ts','Js','Qs','Ks',
-				'Ah','2h','3h','4h','5h','6h','7h','8h','9h','Th','Jh','Qh','Kh',
-				'Ac','2c','3c','4c','5c','6c','7c','8c','9c','Tc','Jc','Qc','Kc',
-				'Ad','2d','3d','4d','5d','6d','7d','8d','9d','Td','Jd','Qd','Kd'];
+let deck = ['Sa','S2','S3','S4','S5','S6','S7','S8','S9','St','Sj','Sq','Sk',
+				'Ha','H2','H3','H4','H5','H6','H7','H8','H9','Ht','Hj','Hq','Hk',
+				'Ca','C2','C3','C4','C5','C6','C7','C8','C9','Ct','Cj','Cq','Ck',
+				'Da','D2','D3','D4','D5','D6','D7','D8','D9','Dt','Dj','Dq','Dk'];
 let player = [];
 let dealer = [];
 let gameOver = false;
+let cardClassList = [];
 
 
 const reset = () => {
@@ -37,19 +41,21 @@ const reset = () => {
 	betlOO.addEventListener('click', betOH)
 	betSOO.addEventListener('click', betFH)
 	enterBet.addEventListener('click', betEnter)
+	cardClasses
+	for (let c = 0; c >= cardClassList.length - 1; c += 1) {
+		[...cardClasses].forEach(cls => cls.classList.remove(cardClassList[c])
 
+	}
+	deck = ['Sa','S2','S3','S4','S5','S6','S7','S8','S9','St','Sj','Sq','Sk',
+				'Ha','H2','H3','H4','H5','H6','H7','H8','H9','Ht','Hj','Hq','Hk',
+				'Ca','C2','C3','C4','C5','C6','C7','C8','C9','Ct','Cj','Cq','Ck',
+				'Da','D2','D3','D4','D5','D6','D7','D8','D9','Dt','Dj','Dq','Dk']
 	startingMessageControl.classList.remove('show')
 	winningMessageControl.classList.remove('show')
 	player = []
 	dealer = []
-	deck = ['As','2s','3s','4s','5s','6s','7s','8s','9s','Ts','Js','Qs','Ks',
-				'Ah','2h','3h','4h','5h','6h','7h','8h','9h','Th','Jh','Qh','Kh',
-				'Ac','2c','3c','4c','5c','6c','7c','8c','9c','Tc','Jc','Qc','Kc',
-				'Ad','2d','3d','4d','5d','6d','7d','8d','9d','Td','Jd','Qd','Kd']
 	gameOver = false;
-	tempPerson = []
-	tempPlayer = []
-	tempDealer = []
+	wipeTemp()
 	shuffle()	
 }
 
@@ -135,6 +141,7 @@ const dHit = () => {
 }
 const pHit = () => {
 	player.push(deck.shift())
+	cardRender()
 	if (bustCheck(player)) {
 
 	} else {
@@ -146,6 +153,7 @@ const pStand = () => {
 	wipeTemp()
 	for (tempDealer = make(dealer,tempDealer); tempDealer <= 16; dHit()) {
 		console.log('dHit')
+		cardRender()
 	}
 	setWinscreen()
 	
@@ -168,24 +176,24 @@ const setWinscreen = () => {
 	tempDealer = make(dealer,tempDealer)
 	if (!bustCheck(player)) {
 		winningText.innerText = `You bust and lose ${'$' + bet}, Dealer wins!`
-		bet = 0
 	} else if (!bustCheck(dealer)) {
 		winningText.innerText = `Dealer busts, You win ${'$'+ 2*bet}!`
-		bank += 2*bet
-		bet = 0
+		bank += (2 * bet)
 	} else if (tempDealer == tempPlayer) {
 		winningText.innerText = 'Push. Bet returned'
 		bank += bet
-		bet = 0
 	} else {
 		winningText.innerText = `${(tempDealer > tempPlayer) ? `Dealer Wins! You lose ${'$' + bet}` : `You win ${'$'+ 2*bet}!`}`
-		if (tempDealer > tempPlayer){
-			bet = 0
+		if (tempDealer > tempPlayer) {
+
 		} else {
-			bank += 2*bet
-			bet = 0
+			bank += (2 * bet)
 		}
 	}
+	bet = 0
+	betData.innerText = `Bank: ${'$' + bank},Bet: ${'$' + bet}`
+	gameOver = true
+	cardRender(gameOver)
 	winningMessageControl.classList.add('show')
 }
 const make = (role,temp) => {
@@ -193,10 +201,10 @@ const make = (role,temp) => {
 	return temp.reduce(function(accumulator, currentValue){return accumulator+currentValue})
 }
 const cardParse = (arrElem,temp) => {
-	if (arrElem.charAt(0) == 'J' || arrElem.charAt(0) == 'Q' || arrElem.charAt(0) =='K'|| arrElem.charAt(0) =='T') {
+	if (arrElem.charAt(1) == 'j' || arrElem.charAt(1) == 'q' || arrElem.charAt(1) =='k'|| arrElem.charAt(1) =='t') {
 		arrElem = '10'
 	}
-	if (arrElem.charAt(0) == 'A') {
+	if (arrElem.charAt(1) == 'a') {
 		arrElem = '11'
 	}
 	arrElem = arrElem.replace(/\D+/g, "");
@@ -208,24 +216,38 @@ const wipeTemp = () => {
 	tempDealer = [];
 	tempPlayer = [];
 }
-const cardRender = () => {
+const cardRender = (gameOver) => {
 	for (let i in player) {
 		if (i == 0) {
 			slotone.classList.add(player[0])
-		} else if (i == 1){
+			cardClassList.push(player[0])
+		} else if (i == 1) {
 			slottwo.classList.add(player[1])
-		} else {
+			cardClassList.push(player[1])
+		} else if (i == 2) {
+			slotthree.classList.add(player[2])
+			cardClassList.push(player[2])
+		}else {
 			console.log('noMatch', i, player[0], player[1])
 		}
 	}
 	
 	for (let d in dealer) {
 		if (d == 0) {
-			slotsix.classList.add(dealer[0])
-		} else if (d == 1){
+			slotsix.classList.add('back')
+			cardClassList.push(dealer[0])
+		} else if (d == 1) {
 			slotseven.classList.add(dealer[1])
-		} else {
+			cardClassList.push(dealer[1])
+		} else if (d == 2) {
+			sloteight.classList.add(dealer[2])
+			cardClassList.push(dealer[2])
+		}else {
 			console.log('noMatch', d, dealer[0], dealer[1])
+		}
+		if (gameOver) {
+			slotsix.classList.remove('back')
+			slotsix.classList.add(dealer[0])
 		}
 	}
 }
@@ -239,6 +261,4 @@ betlO.addEventListener('click', betT);
 betlOO.addEventListener('click', betOH);
 betSOO.addEventListener('click', betFH);
 enterBet.addEventListener('click', betEnter);
-
-
 
