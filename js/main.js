@@ -32,7 +32,7 @@ let deck = ['Sa','S2','S3','S4','S5','S6','S7','S8','S9','St','Sj','Sq','Sk',
 let player = [];
 let dealer = [];
 let gameOver = false;
-let cardClassList = [];
+
 
 
 const reset = () => {
@@ -41,15 +41,18 @@ const reset = () => {
 	betlOO.addEventListener('click', betOH)
 	betSOO.addEventListener('click', betFH)
 	enterBet.addEventListener('click', betEnter)
-	cardClasses
-	for (let c = 0; c >= cardClassList.length - 1; c += 1) {
-		[...cardClasses].forEach(cls => cls.classList.remove(cardClassList[c])
-
-	}
 	deck = ['Sa','S2','S3','S4','S5','S6','S7','S8','S9','St','Sj','Sq','Sk',
 				'Ha','H2','H3','H4','H5','H6','H7','H8','H9','Ht','Hj','Hq','Hk',
 				'Ca','C2','C3','C4','C5','C6','C7','C8','C9','Ct','Cj','Cq','Ck',
 				'Da','D2','D3','D4','D5','D6','D7','D8','D9','Dt','Dj','Dq','Dk']
+	deck.forEach(card => function(card) {
+		slotone.classList.remove(card)
+		slotthree.classList.remove(card)
+		slottwo.classList.remove(card)
+		slotsix.classList.remove(card)
+		slotseven.classList.remove(card)
+		sloteight.classList.remove(card)
+	})
 	startingMessageControl.classList.remove('show')
 	winningMessageControl.classList.remove('show')
 	player = []
@@ -220,13 +223,10 @@ const cardRender = (gameOver) => {
 	for (let i in player) {
 		if (i == 0) {
 			slotone.classList.add(player[0])
-			cardClassList.push(player[0])
 		} else if (i == 1) {
 			slottwo.classList.add(player[1])
-			cardClassList.push(player[1])
 		} else if (i == 2) {
 			slotthree.classList.add(player[2])
-			cardClassList.push(player[2])
 		}else {
 			console.log('noMatch', i, player[0], player[1])
 		}
@@ -235,13 +235,10 @@ const cardRender = (gameOver) => {
 	for (let d in dealer) {
 		if (d == 0) {
 			slotsix.classList.add('back')
-			cardClassList.push(dealer[0])
 		} else if (d == 1) {
 			slotseven.classList.add(dealer[1])
-			cardClassList.push(dealer[1])
 		} else if (d == 2) {
 			sloteight.classList.add(dealer[2])
-			cardClassList.push(dealer[2])
 		}else {
 			console.log('noMatch', d, dealer[0], dealer[1])
 		}
